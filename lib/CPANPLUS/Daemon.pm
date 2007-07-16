@@ -13,7 +13,7 @@ use base 'Object::Accessor';
 
 local $Params::Check::VERBOSE = 1;
 
-$VERSION = '0.01';
+$VERSION = '0.02';
 
 =pod
 
