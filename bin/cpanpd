@@ -86,7 +86,7 @@ my $map = {
 
 my %args;
 while( my($key,$val) = each %$map ) {
-    $args{$val} = $opts->{$key};
+    $args{$val} = $opts->{$key} if defined $opts->{$key};
 }    
 
 my $cpanpd = CPANPLUS::Daemon->new( %args ) 

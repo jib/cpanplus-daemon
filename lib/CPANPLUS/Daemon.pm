@@ -211,7 +211,7 @@ sub run {
         }
     );
 
-    print $stdout_fh loc("Starting '%1'...", 'cpanpd').$/;
+    print $stdout_fh loc("Starting '%1' on port %2...", 'cpanpd', $self->port ).$/;
 
     $poe_kernel->run;
 

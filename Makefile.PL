@@ -15,6 +15,7 @@ WriteMakefile (
                         'Params::Check'             => '0.22',
                         'Object::Accessor'          => '0.02',
                     },
+    EXE_FILES       => [ qw|bin/cpanpd| ],                    
     AUTHOR          => 'Jos Boumans <kane[at]cpan.org>',
 	ABSTRACT        => 'Remote CPANPLUS Administration Daemon'
 );     
