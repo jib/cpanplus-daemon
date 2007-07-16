@@ -24,9 +24,8 @@ CPANPLUS::Daemon -- Remote CPANPLUS access
 =head1 SYNOPSIS
 
     ### from the command line
-    cpanpd                                  # options from the config
-    cpanpd -P 666 -u my_user -p secret      # options provided,
-                                            # recommended
+    cpanpd -p secret                        # using defaults
+    cpanpd -P 666 -u my_user -p secret      # options provided, recommended
 
     ### using the API
     use CPANPLUS::Daemon;
@@ -58,10 +57,25 @@ to a remote daemon.
 
 =head1 METHODS
 
-=head2 $daemon = CPANPLUS::Daemon->new([username => $user, password => $pass, port => $port]);
+=head2 $daemon = CPANPLUS::Daemon->new(password => $pass, [username => $user, port => $port]);
 
-Creates a new C<CPANPLUS::Daemon> object. All the options will default 
-to the value as described in your C<CPANPLUS::Config>.
+Creates a new C<CPANPLUS::Daemon> object, based on the following paremeters:
+
+=over 4
+
+=item password (required)
+
+The password needed to connect to this server instance
+
+=item username (optional)
+
+The user needed to connect to this server instance. Defaults to C<cpanpd>.
+
+=item port
+
+The port number this server instance will listen on. Defaults to C<1337>.
+
+=back
 
 =cut
 
@@ -69,17 +83,18 @@ sub new {
     my $class = shift;
     my %hash  = @_;
     my $self  = bless {}, $class;
-    my @opts  = qw[password username port];
 
-    $self->mk_accessors(qw[conf shell], @opts);
+    my $tmpl = {
+        password    => { required   => 1 },
+        username    => { default    => 'cpanpd' },
+        port        => { default    => 1337 },
+    };        
+
+    $self->mk_accessors( qw[conf shell], keys %$tmpl );
 
     $self->shell( CPANPLUS::Shell->new() );
     $self->conf(  $self->shell->backend->configure_object );
 
-    ### check arguments
-    my $tmpl = {
-        map { $_ => { default => $self->conf->_get_daemon($_) } } @opts
-    };
 
     my $args = check( $tmpl, \%hash ) or return;
 
@@ -87,7 +102,7 @@ sub new {
     $self->conf->set_program( pager => '' );
 
     ### store all provided opts as accessors
-    $self->$_( $args->{$_} ) for @opts;
+    $self->$_( $args->{$_} ) for keys %$tmpl;
 
     return $self;
 }

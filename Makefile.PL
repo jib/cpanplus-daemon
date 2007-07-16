@@ -10,7 +10,6 @@ WriteMakefile (
                         'Test::More'                => 0, 
                         'POE'                       => 0,
                         'CPANPLUS'                  => '0.051',
-                        'CPANPLUS::Shell::Default'  => '0.051',
                         'IO::String'                => 0,
                         'Locale::Maketext::Simple'  => 0,
                         'Params::Check'             => '0.22',

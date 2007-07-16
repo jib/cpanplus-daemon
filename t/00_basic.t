@@ -31,9 +31,8 @@ use_ok($Class);
 ### XXX port ranges?
 my $Daemon = $Class->new(   password    => $Pass,
                             username    => $User,
-                            port        => $Port );
-                         
-                            
+                            port        => $Port 
+                        );
                             
 ok( $Daemon,                    "New $Class object created" );
 isa_ok( $Daemon,                $Class );
