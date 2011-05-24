@@ -35,21 +35,21 @@ CPANPLUS::Daemon -- Remote CPANPLUS access
                             port        => 666,
                         );
     $daemon->run;
-    
+
     ### (dis)connecting to the daemon, from the default shell
     CPAN Terminal> /connect --user=my_user --pass=secret localhost 666
     ...
     CPAN Terminal> /disconnect
-    
+
 =head1 DESCRIPTION
 
-C<CPANPLUS::Daemon> let's you run a daemon that listens on a specified 
+C<CPANPLUS::Daemon> let's you run a daemon that listens on a specified
 port and can act as a remote backend to your L<CPANPLUS::Shell::Default>.
 
 You can use the L<CPANPLUS::Shell::Default> shell to connect to the
-daemon. 
-Note that both sides (ie, both the server and the client) ideally 
-should run the same version of the L<CPANPLUS::Shell::Default>, to 
+daemon.
+Note that both sides (ie, both the server and the client) ideally
+should run the same version of the L<CPANPLUS::Shell::Default>, to
 ensure maximum compatibillity
 
 See the L<CPANPLUS::Shell::Default> documentation on how to connect
@@ -88,7 +88,7 @@ sub new {
         password    => { required   => 1 },
         username    => { default    => 'cpanpd' },
         port        => { default    => 1337 },
-    };        
+    };
 
     $self->mk_accessors( qw[conf shell], keys %$tmpl );
 
@@ -109,9 +109,9 @@ sub new {
 
 =head2 $daemon->run( [stdout => \*OUT, stderr => \*ERR] );
 
-This actually makes the daemon active. Note that from here on, you lose 
-control of the program, and it is handed to the daemon. You can now 
-only exit the program via a C<SIGINT> or another way that terminates 
+This actually makes the daemon active. Note that from here on, you lose
+control of the program, and it is handed to the daemon. You can now
+only exit the program via a C<SIGINT> or another way that terminates
 the process.
 
 You can override where the daemon sends its output by supplying the an
@@ -136,7 +136,7 @@ sub run {
         stdout  => { default => \*STDOUT_SAVE, store => \$stdout_fh },
         stderr  => { default => \*STDERR_SAVE, store => \$stderr_fh },
     };
-    
+
     check( $tmpl, \%hash ) or return;
 
     #close *STDOUT; close *STDERR;
@@ -230,7 +230,7 @@ This module by Jos Boumans E<lt>kane@cpan.orgE<gt>.
 This module is copyright (c) 2005 Jos Boumans E<lt>kane@cpan.orgE<gt>.
 All rights reserved.
 
-This library is free software; you may redistribute and/or modify it 
+This library is free software; you may redistribute and/or modify it
 under the same terms as Perl itself.
 
 =cut

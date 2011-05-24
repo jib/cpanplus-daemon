@@ -1,6 +1,6 @@
 This is the README file for CPANPLUS::Daemon
 
-Please refer to 'perldoc CPANPLUS::Daemon' after installation for 
+Please refer to 'perldoc CPANPLUS::Daemon' after installation for
 details.
 
 #####################################################################
@@ -9,10 +9,10 @@ details.
 
 CPANPLUS::Daemon
 
-    CPANPLUS::Daemon let's you run a daemon that listens on a 
-    specified port and can act as a remote backend to your 
+    CPANPLUS::Daemon let's you run a daemon that listens on a
+    specified port and can act as a remote backend to your
     CPANPLUS::Shell::Default
-    
+
 #####################################################################
 
 * Installation

@@ -6,7 +6,7 @@ use CPANPLUS::Daemon;
 
 =head1 NAME
 
-cpanpd 
+cpanpd
 
 =head1 SYNOPSIS
 
@@ -18,9 +18,9 @@ C<cpanpd> let's you run a daemon that listens on a specified port
 and can act as a remote backend to your L<CPANPLUS::Shell::Default>.
 
 You can use the L<CPANPLUS::Shell::Default> shell to connect to the
-daemon. 
-Note that both sides (ie, both the server and the client) ideally 
-should run the same version of the L<CPANPLUS::Shell::Default>, to 
+daemon.
+Note that both sides (ie, both the server and the client) ideally
+should run the same version of the L<CPANPLUS::Shell::Default>, to
 ensure maximum compatibillity
 
 =head1 OPTIONS
@@ -30,7 +30,7 @@ ensure maximum compatibillity
 =item -P
 
 This is the port number the daemon will listen on. This defaults to
-the port number mentioned in your L<CPANPLUS::Config>, which by 
+the port number mentioned in your L<CPANPLUS::Config>, which by
 default is C<1337>.
 
 =item -u
@@ -45,8 +45,8 @@ the username mentioned in your L<CPANPLUS::Config>.
 
 =head1 SECURITY
 
-This program is not meant to be secure; all data goes over the 
-network plain text, and with the C<!> command from the shell, the 
+This program is not meant to be secure; all data goes over the
+network plain text, and with the C<!> command from the shell, the
 remote user is allowed to executy any perl code as the user under
 which this daemon is run.
 
@@ -54,7 +54,7 @@ Keep this in mind at all times!
 
 =head1 NOTES
 
-This program required both L<POE> and L<IO::String> installed to 
+This program required both L<POE> and L<IO::String> installed to
 function. You can use L<CPANPLUS> to install them for you.
 
 =head1 AUTHOR
@@ -87,9 +87,9 @@ my $map = {
 my %args;
 while( my($key,$val) = each %$map ) {
     $args{$val} = $opts->{$key} if defined $opts->{$key};
-}    
+}
 
-my $cpanpd = CPANPLUS::Daemon->new( %args ) 
+my $cpanpd = CPANPLUS::Daemon->new( %args )
                 or die loc("Could not initiate daemon\n");
 
 $cpanpd->run;

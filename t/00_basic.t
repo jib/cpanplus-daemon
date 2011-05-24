@@ -21,7 +21,7 @@ use CPANPLUS::Error;
 
 my $Class   = 'CPANPLUS::Daemon';
 my $Port    = 2080;     # stolen from poco::server::http
-my $User    = 'foo';    
+my $User    = 'foo';
 my $Pass    = 'bar';
 my $Shell   = CPANPLUS::Shell->new;
 my $Debug   = @ARGV ? 1 : 0;
@@ -31,9 +31,9 @@ use_ok($Class);
 ### XXX port ranges?
 my $Daemon = $Class->new(   password    => $Pass,
                             username    => $User,
-                            port        => $Port 
+                            port        => $Port
                         );
-                            
+
 ok( $Daemon,                    "New $Class object created" );
 isa_ok( $Daemon,                $Class );
 
@@ -46,7 +46,7 @@ END {
 }
 
 if( $Pid ) {    # we are the parent
-    ok( $Pid,                   "Forked -- querying daemon" );  
+    ok( $Pid,                   "Forked -- querying daemon" );
 
     local *STDOUT;
     tie *STDOUT, 'IO::String';
@@ -59,12 +59,12 @@ if( $Pid ) {    # we are the parent
     ok( $Shell->remote,         "   Connection succeeded" );
     output_ok( qr/Connection accepted/,
                                 "       Confirmed by daemon" );
-    
-    ### eval some perl code 
+
+    ### eval some perl code
     $Shell->dispatch_on_input(  input => "! print '$User'" );
     output_ok( qr/$User/,       "       ! Command succeeded" );
 
-    ### return the banner 
+    ### return the banner
     $Shell->dispatch_on_input(  input => 'v' );
     output_ok( qr/CPANPLUS/,    "       v Command succeeded" );
 
@@ -76,8 +76,8 @@ if( $Pid ) {    # we are the parent
 } else {        # we are the child
     ### don't test here -- will cause test counter mismatches
     #ok( 1,                      "Forked -- starting daemon" );
-    
-    ### silence output 
+
+    ### silence output
     local *FH; tie *FH, 'IO::String';
     $Daemon->run( stdout => \*FH, stderr => \*FH );
 }
@@ -86,12 +86,12 @@ if( $Pid ) {    # we are the parent
 sub output_ok {
     my $re      = shift;
     my $diag    = shift;
-    
+
     seek( STDOUT, 0, 0 );
     my $msg .= join "", <STDOUT>;
-    
+
     diag( $msg ) if $Debug;
-    
+
     like( $msg, $re, $diag );
-}    
-    
+}
+
